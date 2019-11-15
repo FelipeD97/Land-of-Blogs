@@ -20,11 +20,11 @@ class Blogs {
         }
     }
 
-    static async getBlogId(id) {
+    static async getBlogId(blogs_id) {
         try {
             const response = await db.one(`
             SELECT * FROM blogs
-            WHERE id = ${id};
+            WHERE id = ${blogs_id};
             `);
 
             return response;

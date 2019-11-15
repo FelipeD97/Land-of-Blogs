@@ -26,8 +26,8 @@ router.get("/all", async (req, res, next) => {
 });
 
 // Read one blog 
-router.get("/post/:blogs_id?", async (req,res) => {
-    const blogId = req.params.blogs_id;
+router.get("/post/:id?", async (req,res) => {
+    const blogId = req.params.id;
     const blog = await blogModel.getBlogId(blogId);
     res.json(blog).status(200);
 });
@@ -40,8 +40,8 @@ router.get("/:user_id?", async (req, res) => {
 });
 
 // Update blog
-router.put("/post/update/:blogs_id?", async (req, res) => {
-    const blogId = req.params.blogs_id;
+router.put("/post/update/:id?", async (req, res) => {
+    const blogId = req.params.id;
     const { content } = req.body;
     const response = await blogModel.updatePost(blogId, "content", content);
     
@@ -53,8 +53,8 @@ router.put("/post/update/:blogs_id?", async (req, res) => {
 });
 
 // // Delete blog 
-router.delete("/post/delete/:blogs_id?", async (req, res) => {
-    const blogId = req.params.blogs_id;
+router.delete("/post/delete/:id?", async (req, res) => {
+    const blogId = req.params.id;
     const response = await blogModel.removePost(blogId);
     
     if (response.command === "DELETE" && response.rowCount >= 1) {
