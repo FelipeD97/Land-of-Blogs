@@ -21,27 +21,67 @@ class PostUpdate extends Component {
         return data;
     }
 
-    handleChange(content) {
-        this.setState({value: content.target.value});
+    handleChange(e) {
+        const { content } = e.target;
+
+        this.setState({
+            [content]: []
+        });
       }
     
-      handleSubmit(post) {
-        post.preventDefault();
+      handleSubmit = e => {
+          e.preventDefault();
+          const { content } = this.state;
+          const post_id = this.props.match.params.id;
+
+          const data = { post_id, content };
+
+          this.loadData(data);
       }
+
+    //   updatePost = async data => {
+    //       const response
+    //   }
     
 
     render() {
         const { post } = this.state;
 
         return (
-
-            <form onSubmit={this.handleSubmit}>
+            <div>
+                <form onSubmit={this.handleSubmit}>
                 <label>
-                    <h2>{post.title}</h2>
-                    <input type="text" value={this.state.value} onChange={this.handleChange}></input>
+              Your Name
+              <input
+                type="text"
+                value={post.title}
+                placeholder="Your Name"
+                name="username"
+                onChange={this.handleChange}
+              />
+            </label>
+                <label>
+                    <textarea
+                    name="Update"
+                    value={post.content}
+                    placeholder={post.content}
+                    onChange={this.handleChange}
+                    />
                 </label>
-                <input type="submit" value="Update"></input>
+                <button 
+                type="submit">
+                    Update
+                </button>
             </form>
+            <ul>
+                {post.map(update => (
+                    <li key={update.id}>
+                        <p>{update.content}</p>
+                    </li>
+                ))}
+            </ul>
+            </div>
+            
         );
     }
 }

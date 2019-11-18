@@ -27,7 +27,7 @@ class BlogPost extends Component {
 
         return (
             <div>
-                <h2>{post.title}</h2>
+                <h1>{post.title}</h1>
                 <p>{post.content}</p>
                 <Link to={`/post/update/${post.id}`}>
                     <button>Update</button>
